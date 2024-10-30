@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: MOMENTum
+  config:
+    import: optional:file:.env[.properties]
+
+  mvc:
+    problemdetails:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/momentum}
+    username: ${POSTGRES_USER:root}
+    password: ${POSTGRES_PASSWORD:root}
+  flyway:
+    schemas: public
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+logging:
+  level:
+    root: warn

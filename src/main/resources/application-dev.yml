@@ -1,0 +1,14 @@
+spring:
+  flyway:
+    locations: "classpath:db/migration,classpath:db/initdata"
+    schemas: public
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

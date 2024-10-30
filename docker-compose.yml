@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:15.7-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - data-momentum:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  data-momentum:
