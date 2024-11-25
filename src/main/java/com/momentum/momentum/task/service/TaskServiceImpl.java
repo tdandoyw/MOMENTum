@@ -1,5 +1,6 @@
 package com.momentum.momentum.task.service;
 
+import com.momentum.momentum.core.exceptions.EntityNotFoundMomentumException;
 import com.momentum.momentum.task.dto.TaskRequestDto;
 import com.momentum.momentum.task.dto.TaskResponseDto;
 import com.momentum.momentum.task.dto.TaskResponsePageDto;
@@ -7,7 +8,6 @@ import com.momentum.momentum.task.mapper.TaskMapper;
 import com.momentum.momentum.task.model.Task;
 import com.momentum.momentum.task.model.TimeFrame;
 import com.momentum.momentum.task.persistence.TaskDao;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     private final TaskDao taskDao;
     private final TaskMapper taskMapper;
@@ -47,7 +47,7 @@ public class TaskServiceImpl implements TaskService{
     public TaskResponseDto getById(UUID id) {
         return taskMapper.toTaskResponseDto(
                 taskDao.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException(id.toString()))
+                        .orElseThrow(() -> new EntityNotFoundMomentumException("task", id))
         );
     }
 
